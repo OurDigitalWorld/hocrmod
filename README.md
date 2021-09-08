@@ -9,7 +9,7 @@ example below:
 <img src="https://github.com/OurDigitalWorld/hocrmod/blob/main/misc/mj0029.jpg?raw=true" width="30%" height="30%">
 
 There is an [open issue](https://github.com/tesseract-ocr/tesseract/issues/3446) on this sort of scenario and
-it may be sorted out within the core program.  The main program here, _hocrmod.py_, is a simple python script that uses some
+it may be sorted out within the _Tesseract_ itself.  The main program here, _hocrmod.py_, is a simple python script that uses some
 [OpenCV](https://opencv.org/) tricks to detect missing regions and has several options:
 
 ```
@@ -35,31 +35,33 @@ python -f mj0029.jpg -d
 
 The script will look for a corresponding _hocr_ file with the same path as the image. If one is not found, then
 Tesseract will be run on the image. To use a slightly more ambitious image from the kind folks at the
-[Internet Archive](https://archive.org/), consider this image:
+[Internet Archive](https://archive.org/), consider this:
 
 <img src="https://github.com/OurDigitalWorld/hocrmod/blob/main/misc/sim5.jpg?raw=true" width="30%" height="30%">
 
-Tesseract does an amazing job on most of this image. With the _-d_ option, we can look in the _regions_ image
+_Tesseract_ does an amazing job on most of this image. With the _-d_ option, we can look in the _regions_ image
 to inspect what's left afterwards. The script uses the base _hocr_ file (which provides coordinates), to blank out 
-regions that have been identified by Tesseract, leaving the following:
+regions that have been identified by _Tesseract_, leaving the following:
 
 <img src="https://github.com/OurDigitalWorld/hocrmod/blob/main/misc/sim5_regions.jpg?raw=true" width="30%" height="30%">
 
-Again, Tesseract does an amazing job, there really isn't much left here. But, in this case, we want what's left, particularly
-the page number. Tesseract also, rightfully, ignores the _separator_ lines. These are usually stylistic and 
+Again, _Tesseract_ does a lot of good things here, there really isn't much left. But, in this case, 
+the small regions cover some important semantic content, particularly
+the page number. _Tesseract_ also, rightfully, ignores the _separator_ lines. These are usually stylistic and 
 are not appropriate for OCR. However, the script tries to use _OpenCV_ to identify these and blank them out rather
-than skipping the regions altogether. This is because of situations like the following:
+than skipping regions with separators altogether. This is because of situations like the following:
 
 <img src="https://github.com/OurDigitalWorld/hocrmod/blob/main/misc/sim5_ex.jpg?raw=true" width="50%" height="50%">
 
-Here the line overlaps with a textual area. The line identification is not infallible, but the associated
-_contours_ image will show what regions will be subject to OCR:
+Here the line overlaps with a textual area. The line identification is not infallible, and there will often be
+questionable regions in the mix, but the associated
+_contours_ image will show what regions will be subject to OCR with this approach:
 
 <img src="https://github.com/OurDigitalWorld/hocrmod/blob/main/misc/sim5_contours.jpg?raw=true" width="30%" height="30%">
 
-The script doesn't use [pytesseract](https://pypi.org/project/pytesseract/) and the parameters can be overridden for
-the Tesseract executable. In most cases, the results will not be of much interest, but the main concern is usually
-to get the line number, which may be picked up by this approach:
+The script doesn't currently use [pytesseract](https://pypi.org/project/pytesseract/) and the parameters 
+can be overridden for the Tesseract executable. It might make sense to add a check for the confidence number, since
+bogus regions would be easy to identify, or add some kind of check to limit the additions to the following:
 
 <img src="https://github.com/OurDigitalWorld/hocrmod/blob/main/misc/sim5_coords_00169_02971_00334_03082.png?raw=true" width="50%" height="50%">
 
