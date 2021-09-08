@@ -61,7 +61,8 @@ _contours_ image will show what regions will be subject to OCR with this approac
 
 The script doesn't currently use [pytesseract](https://pypi.org/project/pytesseract/) and the parameters 
 can be overridden for the Tesseract executable. It might make sense to add a check for the confidence number, since
-bogus regions would be easy to identify, or add some kind of check to limit the additions to the following:
+bogus regions would be easy to identify, or add some kind of check to limit the additions to the following, i.e., 
+the elusive page number:
 
 <img src="https://github.com/OurDigitalWorld/hocrmod/blob/main/misc/sim5_coords_00169_02971_00334_03082.png?raw=true" width="50%" height="50%">
 
