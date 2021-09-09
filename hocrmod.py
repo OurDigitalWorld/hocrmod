@@ -237,7 +237,10 @@ def getSLine(roi,iborder):
     #missing text
 
     dst = cv2.Canny(roi, 50, 200, None, 3)
-    slines = cv2.HoughLinesP(dst, 1, math.pi / 180, 50, None, 50, 10)
+    #use explicit parameters - see https://stackoverflow.com/questions/35609719/opencv-houghlinesp-parameters
+    slines = cv2.HoughLinesP(dst, rho = 1, theta = math.pi / 180,
+        threshold = 200, minLineLength=200, maxLineGap=50)
+
     if slines is None:
         return []
 
