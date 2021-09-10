@@ -1,6 +1,11 @@
 hocrmod
 =======
 
+_TO DO: I have been asked to make some fundamental changes to the script here. Just a note that I will
+be updating the approach in the next week or so (2021-09-10) to include a confidence threshold (to remove
+questionable regions in the "missed" category), and address a reading-order/paragraph layout request.
+Still, the basic OpenCV/image steps will remain the same._
+
 This project attempts to address an edge case with [Tesseract](https://github.com/tesseract-ocr/tesseract) where small
 regions are missed for recognition, and uses Tesseract's support of [hocr](https://en.wikipedia.org/wiki/HOCR) to merge 
 the OCR from missing regions. This seems to most often occur with page numbers, for example, as seen for page _14_ in the 
