@@ -273,6 +273,7 @@ def writeModHocr(orig_page,hocr_file):
         #remove blank lines (if any) - these sometimes creep in hocr files for some reason
         rstr = os.linesep.join([s for s in rstr.splitlines() if s])
         f.write(rstr.encode('utf8'))
+        f.close()
 
 """ these are the paragraph regions coming from missed regions """
 def runThruPars(img_base,pars,orig_page,conf,lang):
@@ -499,6 +500,7 @@ def runThruContours(ibase,im,debug,tess_args,iborder,lang):
 
     return cand_cnt, pars
 
+""" write results to file """
 def writeHocr(block,fhocr):
 
     hfile = open(fhocr, "w+b")
@@ -512,12 +514,12 @@ arg_named.add_argument("-f","--file",
 arg_named.add_argument("-b","--border", default=10, type=int,
     help="adjust border value for extracted regions")
 arg_named.add_argument('-a', '--arguments', type=str, 
-    default="--psm 6",
+    default="--psm 6 -c tessedit_pageseg_mode=6",
     help="arguments for tesseract on missing regions")
 arg_named.add_argument("-d","--debug", default=False, 
     action="store_true",
     help="create debug files")
-arg_named.add_argument("-c","--conf", default=75, type=int,
+arg_named.add_argument("-c","--conf", default=50, type=int,
     help="set confidence number threshold for mised regions")
 arg_named.add_argument('-l', '--lang', type=str, 
     default="eng",
