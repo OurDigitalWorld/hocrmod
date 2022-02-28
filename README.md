@@ -33,7 +33,7 @@ named arguments:
 The easiest way to see what's happening with this approach is to run the script with the _-d_ option. For example:
 
 ```
-python -f mj0029.jpg -d
+python hocrmod.py -f mj0029.jpg -d
 ```
 
 The script will look for a corresponding _hocr_ file with the same path as the image. If one is not found, then
