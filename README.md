@@ -73,6 +73,25 @@ With the _-d_ option, the resulting _hocr_ files will be created that have the c
 _sim5_coords_00169_02971_00334_03082.png_. The original _hocr_ file will be renamed with a _.bak_ extension, unless no text is 
 produced with the script, in which case the original _hocr_ file will be untouched.
 
+This project also includes the _cleanhocr.py_ script which we use to filter _hocr_ files based on a confidence level. This is
+sometimes useful with the _psm_ for _sparse text_ options, where the results can include content not captured by other
+settings. None of these options seem to capture the page number in the scenario here. The parameters are as follows:
+
+```
+usage: cleanhocr.py [-h] [-f FILE] [-c CONF] [-l LANG] [-n] [-t TITLE]
+
+options:
+  -h, --help            show this help message and exit
+
+named arguments:
+  -f FILE, --file FILE  input file, for example: page.hocr
+  -c CONF, --conf CONF  set confidence number threshold for ocr words
+  -l LANG, --lang LANG  language for OCR
+  -n, --number          flag to bypass confidence value for words with number(s)
+  -t TITLE, --title TITLE
+                        title to set for HOCR file
+```
+
 Thanks, as always, to the Internet Archive for all of the great work they do,
 and to my colleagues at [OurDigitalWorld](https://ourdigitalworld.net/) as well as the 
 [Centre for Digital Scholarship](https://cdigs.uwindsor.ca/) for supporting
