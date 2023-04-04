@@ -75,7 +75,8 @@ produced with the script, in which case the original _hocr_ file will be untouch
 
 This project also includes the _cleanhocr.py_ script which we use to filter _hocr_ files based on a confidence level. This is
 sometimes useful with the _psm_ for _sparse text_ options, where the results can include content not captured by other
-settings. None of these options seem to capture the page number in the scenario here. The parameters are as follows:
+settings. None of these options seem to capture the page number in the scenario here, but the _sparse text_ options can
+often make a difference for other types of missed text. The parameters are as follows:
 
 ```
 usage: cleanhocr.py [-h] [-f FILE] [-c CONF] [-l LANG] [-n] [-t TITLE]
